@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SUPER SPEED SERVICES</title>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    min-height: 100vh;
+    background: #0a0e17;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  #shuffle-heading {
+    font-size: 4em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+  .blue {
+    color: #3b82f6;
+  }
+  .profile-container {
+    background: rgba(30, 41, 59, 0.95);
+    padding: 2.5em 3em;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+    min-width: 340px;
+    max-width: 90vw;
+  }
+  .profile-title {
+    font-size: 2.2em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    color: #3b82f6;
+    text-align: center;
+  }
+  .profile-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2em;
+  }
+  .profile-list li {
+    margin-bottom: 1em;
+    background: rgba(59, 130, 246, 0.08);
+    padding: 0.8em 1em;
+    border-radius: 8px;
+  }
+  .profile-label {
+    font-weight: 600;
+    color: #3b82f6;
+    margin-right: 0.5em;
+  }
+  .profile-edu {
+    margin-top: 0.5em;
+    margin-bottom: 0.2em;
+    font-weight: 600;
+    color: #3b82f6;
+  }
+  .profile-hobbies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+  .profile-hobby {
+    background: #3b82f6;
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.2em 0.7em;
+    font-size: 1em;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+<h2 id="shuffle-heading">
+  Logistics and <span class="blue">Supply Chain</span>
+</h2>
+<script>
+  function shuffleText(text) {
+    const arr = text.split('');
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr.join('');
+  }
+
+  const heading = document.getElementById('shuffle-heading');
+  const originalHTML = heading.innerHTML;
+  let shuffling = false;
+
+  function animateShuffle(times) {
+    if (times <= 0) {
+      heading.innerHTML = originalHTML;
+      shuffling = false;
+      heading.style.transform = 'rotate(0deg)';
+      return;
+    }
+    // Only shuffle the text, not the span
+    const [first, rest] = originalHTML.split('<span');
+    heading.innerHTML = shuffleText(first.trim()) + '<span' + rest;
+    heading.style.transform = `rotate(${(Math.random() - 0.5) * 10}deg)`;
+    setTimeout(() => animateShuffle(times - 1), 80);
+  }
+
+  heading.addEventListener('mouseenter', () => {
+    if (!shuffling) {
+      shuffling = true;
+      animateShuffle(10);
+    }
+  });
+  heading.addEventListener('mouseleave', () => {
+    heading.innerHTML = originalHTML;
+    heading.style.transform = 'rotate(0deg)';
+    shuffling = false;
+  });
+</script>
+<div class="profile-container">
+  <div class="profile-title">Profile</div>
+  <ul class="profile-list">
+    <li><span class="profile-label">Name:</span> yashas</li>
+    <li><span class="profile-label">DOB:</span> 23-04-2006</li>
+    <li><span class="profile-label">Email:</span> yashas2202@gmail.com</li>
+    <li>
+      <div class="profile-edu">Education:</div>
+      <ul style="margin:0 0 0 1.2em; padding:0; list-style: disc; color:#fff;">
+        <li>10th - 95%</li>
+        <li>12th - 96%</li>
+      </ul>
+    </li>
+    <li>
+      <span class="profile-label">Hobbies:</span>
+      <span class="profile-hobbies">
+        <span class="profile-hobby">fitness</span>
+        <span class="profile-hobby">fashion</span>
+        <span class="profile-hobby">reading books</span>
+      </span>
+    </li>
+  </ul>
+</div>
+</body>
+</html> 
