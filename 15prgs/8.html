@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p id="a">First text</p><p id="b">Second text</p>
+<button onclick="swap()">Swap</button>
+<script>
+function swap(){
+ let a=document.getElementById("a"),b=document.getElementById("b");
+ let t=a.innerText;a.innerText=b.innerText;b.innerText=t;
+}
+</script>
+</body>
+</html>

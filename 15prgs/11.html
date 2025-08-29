@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="box"></div>
+<button onclick="add()">Add Paragraph</button>
+<script>
+function add(){
+ let p=document.createElement("p");
+ p.innerText="New Paragraph";
+ document.getElementById("box").appendChild(p);
+}
+</script>
+</body>
+</html>

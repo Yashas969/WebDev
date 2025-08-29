@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bill and Discount Calculator</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+      }
+
+      .title {
+        color: #333;
+        margin-bottom: 25px;
+      }
+
+      .input-container {
+        margin-bottom: 20px;
+      }
+
+      .input-container label {
+        display: block;
+        font-size: 1.2em;
+        margin-bottom: 8px;
+        color: #555;
+      }
+
+      .input-container input {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .summary-container {
+        background-color: #e9e9e9;
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px dashed #aaa;
+        margin-top: 20px;
+      }
+
+      .summary-container p {
+        margin: 5px 0;
+        font-size: 1.1em;
+      }
+
+      .summary-container p:first-child {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      
+      const BillInput = ({ bill, onSetBill }) => {
+        return (
+          <div className="input-container">
+            <label htmlFor="bill">Bill Amount (₹):</label>
+            <input
+              id="bill"
+              type="number"
+              min="0"
+              value={bill}
+              onChange={(e) => onSetBill(Number(e.target.value))}
+              placeholder="Enter bill amount"
+            />
+          </div>
+        );
+      };
+
+      
+      const DiscountInput = ({ discount, onSetDiscount }) => {
+        return (
+          <div className="input-container">
+            <label htmlFor="discount">Discount Percentage (%):</label>
+            <input
+              id="discount"
+              type="number"
+              min="0"
+              max="100"
+              value={discount}
+              onChange={(e) => onSetDiscount(Number(e.target.value))}
+              placeholder="Enter discount %"
+            />
+          </div>
+        );
+      };
+
+      
+      const DiscountSummary = ({ bill, discount, finalPrice, discountedAmount }) => {
+        if (finalPrice <= 0 || bill <= 0) {
+          return null;
+        }
+
+        return (
+          <div className="summary-container">
+            <p>Discounted Amount: **₹ {discountedAmount.toFixed(2)}**</p>
+            <p>Final Price: **₹ {finalPrice.toFixed(2)}**</p>
+          </div>
+        );
+      };
+
+      
+      const App = () => {
+        const [bill, setBill] = useState('');
+        const [discount, setDiscount] = useState('');
+
+        const numericBill = Number(bill) || 0;
+        const numericDiscount = Number(discount) || 0;
+
+        const discountedAmount = (numericBill * numericDiscount) / 100;
+        const finalPrice = numericBill - discountedAmount;
+
+        return (
+          <div className="container">
+            <h1 className="title">Bill and Discount Calculator</h1>
+            <BillInput bill={bill} onSetBill={setBill} />
+            <DiscountInput discount={discount} onSetDiscount={setDiscount} />
+            <DiscountSummary
+              bill={numericBill}
+              discount={numericDiscount}
+              finalPrice={finalPrice}
+              discountedAmount={discountedAmount}
+            />
+          </div>
+        );
+      };
+
+      
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

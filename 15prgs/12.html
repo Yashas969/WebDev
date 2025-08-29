@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+<ul id="ul"><li>1</li><li>2</li></ul>
+<button onclick="del()">Delete Last Element</button>
+<script>
+function del(){
+ let ul=document.getElementById("ul");
+ if(ul.lastChild)ul.removeChild(ul.lastChild);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form onsubmit="return validate()">
+<input id="t" type="text">
+<input type="submit">
+</form>
+<script>
+function validate(){
+ if(document.getElementById("t").value==""){alert("Field required");return false;}
+ return true;
+}
+</script>
+</body>
+</html>
+

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Home Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400&display=swap');
+
+        body {
+            font-family: "Open Sans", sans-serif;
+            margin: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+      
+        .navbar {
+            background-color: #2c3e50;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            float: left;
+            color: white;
+            text-align: center;
+            padding: 18px 25px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #3498db; 
+        }
+
+       
+        .header {
+            padding: 60px;
+            text-align: center;
+            background: linear-gradient(to right, #3498db, #2ecc71); 
+            color: white;
+        }
+        
+        .header h1 {
+            font-family: "Roboto", sans-serif;
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+     
+        .content {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #ac91eb; 
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content h2 {
+            font-family: "Roboto", sans-serif;
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .content p {
+            line-height: 1.6;
+            font-size: 1.1em;
+            color: #555;
+        }
+        
+        .content img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            margin: 25px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .content img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="Profile.html">About me</a>
+        <a href="Gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a> 
+    </div>
+
+    <div class="header">
+        <h1>Welcome to My Website</h1>
+        <p>Exploring HTML and CSS Design</p>
+    </div>
+
+    <div class="content">
+        <h2>About This Page</h2>
+        <p>This page is to display all the programs done in web technologies.</p>
+        <p><strong>Go to gallery to view the Programs</strong></p>
+        <img src="https://via.placeholder.com/500x300.png?text=Sample+Image" alt="eg pic">
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+    </div>
+</body>
+</html>

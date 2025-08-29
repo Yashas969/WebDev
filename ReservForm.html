@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservation Form</title>
+    <style>
+      :root {
+        --primary-color: #3498db; /* Blue */
+        --secondary-color: #ecf0f1; /* Light Gray */
+        --accent-color: #2ecc71; /* Emerald Green */
+        --text-color: #2c3e50; /* Dark Blue */
+        --background-color: #e8f0fe; /* Very Light Blue */
+        --card-background: #ffffff; /* White */
+        --error-color: #e74c3c; /* Red */
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .form-container {
+        width: 90%;
+        max-width: 650px;
+        margin: auto;
+        padding: 40px;
+        background-color: var(--card-background);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .header h2 {
+        font-size: 2.2em;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .header h5 {
+        font-size: 1em;
+        color: var(--text-color);
+        margin-top: 5px;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .form-row label {
+        font-weight: bold;
+        color: var(--text-color);
+      }
+
+      .form-row input,
+      .form-row textarea,
+      .form-row select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--secondary-color);
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 1em;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      .form-row input:focus,
+      .form-row textarea:focus,
+      .form-row select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+        outline: none;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .gender-group {
+        display: flex;
+        gap: 20px;
+      }
+
+      .gender-group label {
+        font-weight: normal;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .gender-group input[type="radio"] {
+        margin-right: 5px;
+        accent-color: var(--primary-color);
+      }
+
+      .error {
+        color: var(--error-color);
+        font-size: 0.85em;
+        margin-top: 5px;
+      }
+
+      .button-group {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+      }
+
+      input[type="submit"] {
+        padding: 14px 28px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1em;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: var(--accent-color);
+        color: white;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #27ae60;
+        transform: translateY(-2px);
+      }
+      
+      @media screen and (min-width: 600px) {
+        .form-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .full-width {
+          grid-column: 1 / -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <div class="header">
+        <h2>Reservation Form</h2>
+        <h5>Please fill out the details below to reserve.</h5>
+      </div>
+      <form id="reservation-form" action="#" method="post">
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+            <span class="error" id="name-error"></span>
+          </div>
+          
+          <div class="form-row">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="1" placeholder="Enter your age" required />
+            <span class="error" id="age-error"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+            <span class="error" id="email-error"></span>
+          </div>
+          
+          <div class="form-row">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" inputmode="numeric" maxlength="10" placeholder="Enter 10-digit number" required />
+            <span class="error" id="phone-error"></span>
+          </div>
+          
+          <div class="form-row">
+            <label>Gender:</label>
+            <div class="gender-group">
+              <input type="radio" id="male" name="gender" value="Male" required />
+              <label for="male">Male</label>
+              <input type="radio" id="female" name="gender" value="Female" />
+              <label for="female">Female</label>
+            </div>
+            <span class="error" id="gender-error"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="date">Reservation Date:</label>
+            <input type="date" id="date" name="date" required />
+            <span class="error" id="date-error"></span>
+          </div>
+          
+          <div class="form-row">
+            <label for="time">Reservation Time:</label>
+            <input type="time" id="time" name="time" required />
+            <span class="error" id="time-error"></span>
+          </div>
+          
+          <div class="form-row">
+            <label for="people">No. of People:</label>
+            <input type="number" id="people" name="people" min="1" placeholder="Enter number of people" required />
+            <span class="error" id="people-error"></span>
+          </div>
+          
+          <div class="form-row full-width">
+            <label for="notes">Special Requests/Notes:</label>
+            <textarea id="notes" name="notes" placeholder="e.g., dietary restrictions, seating preference"></textarea>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <input type="submit" value="Reserve" />
+        </div>
+      </form>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("reservation-form");
+        
+
+        const nameInput = document.getElementById("name");
+        const ageInput = document.getElementById("age");
+        const emailInput = document.getElementById("email");
+        const phoneInput = document.getElementById("phone");
+        const dateInput = document.getElementById("date");
+        const timeInput = document.getElementById("time");
+        const peopleInput = document.getElementById("people");
+
+        const nameError = document.getElementById("name-error");
+        const ageError = document.getElementById("age-error");
+        const emailError = document.getElementById("email-error");
+        const phoneError = document.getElementById("phone-error");
+        const dateError = document.getElementById("date-error");
+        const timeError = document.getElementById("time-error");
+        const peopleError = document.getElementById("people-error");
+
+        const showError = (element, message) => {
+          element.textContent = message;
+        };
+
+        const clearError = (element) => {
+          element.textContent = "";
+        };
+
+        
+        nameInput.addEventListener("input", () => {
+          if (nameInput.value.trim().length < 4) {
+            showError(nameError, "Name must be at least 4 characters.");
+          } else {
+            clearError(nameError);
+          }
+        });
+
+        ageInput.addEventListener("input", () => {
+          const age = parseInt(ageInput.value, 10);
+          if (isNaN(age) || age < 1) {
+            showError(ageError, "Please enter a valid age.");
+          } else {
+            clearError(ageError);
+          }
+        });
+
+        emailInput.addEventListener("input", () => {
+          const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!pattern.test(emailInput.value.trim())) {
+            showError(emailError, "Please enter a valid email.");
+          } else {
+            clearError(emailError);
+          }
+        });
+
+        phoneInput.addEventListener("input", () => {
+          phoneInput.value = phoneInput.value.replace(/\D/g, "");
+          if (phoneInput.value.length !== 10) {
+            showError(phoneError, "Phone number must be exactly 10 digits.");
+          } else {
+            clearError(phoneError);
+          }
+        });
+
+        peopleInput.addEventListener("input", () => {
+          const people = parseInt(peopleInput.value, 10);
+          if (isNaN(people) || people < 1) {
+            showError(peopleError, "Number of people must be at least 1.");
+          } else {
+            clearError(peopleError);
+          }
+        });
+
+        form.addEventListener("submit", (e) => {
+          let hasError = false;
+          
+          if (nameInput.value.trim().length < 3) { showError(nameError, "Name is required."); hasError = true; }
+          if (!emailInput.value.includes('@')) { showError(emailError, "Email is invalid."); hasError = true; }
+          if (phoneInput.value.length !== 10) { showError(phoneError, "Phone number must be 10 digits."); hasError = true; }
+          if (dateInput.value.trim() === "") { showError(dateError, "Date is required."); hasError = true; }
+          if (timeInput.value.trim() === "") { showError(timeError, "Time is required."); hasError = true; }
+          if (isNaN(parseInt(peopleInput.value, 10)) || parseInt(peopleInput.value, 10) < 1) { showError(peopleError, "Number of people is required."); hasError = true; }
+
+          if (hasError) {
+            e.preventDefault();
+            alert("Please fix the form errors before submitting.");
+          } else {
+            e.preventDefault(); 
+            alert("✅ Reservation submitted successfully!");
+            form.reset();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

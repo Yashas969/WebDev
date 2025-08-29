@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Application Form</title>
+    <style>
+      :root {
+        --primary-color: #4a90e2;
+        --secondary-color: #e0e0e0;
+        --accent-color: #27ae60;
+        --text-color: #333;
+        --background-color: #f5f7fa;
+        --card-background: #ffffff;
+        --error-color: #c0392b;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        background-color: var(--card-background);
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        max-width: 800px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--primary-color);
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        font-weight: 600;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .form-section {
+        background-color: var(--background-color);
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .form-row label {
+        font-weight: 600;
+        font-size: 1em;
+        color: var(--text-color);
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"],
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid var(--secondary-color);
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 1em;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="tel"]:focus,
+      input[type="date"]:focus,
+      textarea:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 8px rgba(74, 144, 226, 0.2);
+        outline: none;
+      }
+
+      .options-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .options-group label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-weight: normal;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin-right: 8px;
+        accent-color: var(--primary-color);
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .error {
+        color: var(--error-color);
+        font-size: 0.85em;
+        margin-top: 5px;
+        display: block;
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+      }
+
+      .form-actions input[type="submit"] {
+        background-color: var(--accent-color);
+        color: white;
+        padding: 15px 35px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .form-actions input[type="submit"]:hover {
+        background-color: #2ecc71;
+        transform: translateY(-3px);
+      }
+
+      @media (min-width: 600px) {
+        .form-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .full-width {
+          grid-column: 1 / -1;
+        }
+
+        .form-actions {
+          grid-column: 1 / -1;
+        }
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+
+        
+        const studentName = document.getElementById("studentName");
+        const fatherName = document.getElementById("fatherName");
+        const motherName = document.getElementById("motherName");
+        const phone = document.getElementById("phone");
+        const email = document.getElementById("email");
+
+        
+        const showError = (element, message) => {
+          let errorSpan = element.nextElementSibling;
+          if (!errorSpan || !errorSpan.classList.contains("error")) {
+            errorSpan = document.createElement("span");
+            errorSpan.classList.add("error");
+            element.parentNode.appendChild(errorSpan);
+          }
+          errorSpan.textContent = message;
+        };
+        const clearError = (element) => {
+          let errorSpan = element.nextElementSibling;
+          if (errorSpan && errorSpan.classList.contains("error")) {
+            errorSpan.textContent = "";
+          }  
+        };
+
+        
+        const validateNameField = (input) => {
+          input.value = input.value.replace(/[^A-Za-z\s]/g, "");
+          if (input.value.trim().length < 3) {
+            showError(input, "Must be at least 3 characters and only letters.");
+          } else {
+            clearError(input);
+          }
+        };
+
+        studentName.addEventListener("input", () =>
+          validateNameField(studentName)
+        );
+        fatherName.addEventListener("input", () =>
+          validateNameField(fatherName)
+        );
+        motherName.addEventListener("input", () =>
+          validateNameField(motherName)
+        );
+
+        phone.addEventListener("input", () => {
+          phone.value = phone.value.replace(/\D/g, "");
+          if (phone.value.length !== 10) {
+            showError(phone, "Phone number must be exactly 10 digits.");
+          } else {
+            clearError(phone);
+          }
+        });
+
+        email.addEventListener("input", () => {
+          const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!pattern.test(email.value.trim())) {
+            showError(email, "Enter a valid email address.");
+          } else {
+            clearError(email);
+          }
+        });
+
+        form.addEventListener("submit", (e) => {
+          const errors = form.querySelectorAll(".error");
+          let hasError = false;
+          errors.forEach((err) => {
+            if (err.textContent !== "") hasError = true;
+          });
+
+          if (hasError) {
+            e.preventDefault();
+            alert("Please fix the errors before submitting the form.");
+          } else {
+            e.preventDefault(); 
+            alert("✅Form submitted successfully!");
+            form.reset();
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>APPLICATION FORM</h1>
+      <form>
+        <div class="form-grid">
+          <div class="form-section">
+            <h2 class="full-width">Personal Details</h2>
+            <div class="form-row">
+              <label for="studentName">Student's Name:</label>
+              <input type="text" id="studentName" name="sname" placeholder="Enter student's full name" required />
+              <span class="error"></span>
+            </div>
+            <div class="form-row">
+              <label for="fatherName">Father's Name:</label>
+              <input type="text" id="fatherName" name="fname" placeholder="Enter father's full name" required />
+              <span class="error"></span>
+            </div>
+            <div class="form-row">
+              <label for="motherName">Mother's Name:</label>
+              <input type="text" id="motherName" name="mname" placeholder="Enter mother's full name" required />
+              <span class="error"></span>
+            </div>
+            <div class="form-row">
+              <label for="dob">Date of Birth:</label>
+              <input type="date" id="dob" name="dob" required />
+            </div>
+            <div class="form-row">
+              <label>Gender:</label>
+              <div class="options-group">
+                <label><input type="radio" name="gender" value="Male" required /> Male</label>
+                <label><input type="radio" name="gender" value="Female" /> Female</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h2 class="full-width">Contact Details</h2>
+            <div class="form-row">
+              <label for="email">Email ID:</label>
+              <input type="email" id="email" name="mail" placeholder="Enter email address" required />
+              <span class="error"></span>
+            </div>
+            <div class="form-row">
+              <label for="phone">Phone No.:</label>
+              <input type="tel" id="phone" name="phone" placeholder="e.g., 9876543210" title="Please enter a 10-digit phone number" pattern="[0-9]{10}" required />
+              <span class="error"></span>
+            </div>
+            <div class="form-row full-width">
+              <label for="address">Address:</label>
+              <textarea id="address" name="address" rows="3" placeholder="Enter full address" required></textarea>
+            </div>
+          </div>
+
+          <div class="form-section full-width">
+            <h2 class="full-width">Course Selection</h2>
+            <div class="form-row">
+              <label>Choose Course:</label>
+              <div class="options-group">
+                <label><input type="radio" name="course" value="BBA" required /> BBA</label>
+                <label><input type="radio" name="course" value="BCA" /> BCA</label>
+                <label><input type="radio" name="course" value="BSc" /> BSc</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <input type="submit" value="Submit Application" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

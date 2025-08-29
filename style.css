@@ -1,0 +1,9 @@
+
+/* style.css - External CSS */
+.external-style {
+    background-color: #aaeef3;
+    color: rgb(10, 10, 10);
+    padding: 10px;
+    text-align: center;
+    border: 2px dashed rgba(236, 157, 10, 0.959);
+}

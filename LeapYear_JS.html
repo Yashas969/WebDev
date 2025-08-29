@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leap Year Checker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f7f9; /* Soft, light blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #2c3e50; /* Dark blue heading */
+            margin-bottom: 25px;
+            font-size: 2em;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        label {
+            font-size: 1.1em;
+            color: #34495e;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="number"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        button {
+            background-color: #2ecc71; /* Emerald green button */
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        #result {
+            margin-top: 25px;
+            font-size: 1.4em;
+            font-weight: bold;
+            min-height: 25px;
+            color: #34495e;
+        }
+
+        .leap {
+            color: #27ae60 !important; 
+        }
+
+        .not-leap {
+            color: #e74c3c !important; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Leap Year Checker</h1>
+        <form id="leap-check">
+            <div class="input-group">
+                <label for="num">Enter Year</label>
+                <input type="number" name="num" id="num" placeholder="e.g., 2024" required>
+            </div>
+            <button type="submit">Check</button>
+            <label id="result"></label>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("leap-check").addEventListener("submit", function(e){
+            e.preventDefault();
+            const year = parseInt(document.getElementById("num").value);
+            const resultElement = document.getElementById("result");
+
+            if (isNaN(year)) {
+                resultElement.innerText = "Please enter a valid year.";
+                resultElement.className = "not-leap";
+                return;
+            }
+
+            if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+                resultElement.innerText = `${year} is a Leap Year`;
+                resultElement.className = "leap";
+            } else {
+                resultElement.innerText = `${year} is NOT a Leap Year`;
+                resultElement.className = "not-leap";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,39 +1,285 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Profile Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yashas R - My Profile</title>
+    <style>
+        /* Google Fonts Import */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+        :root {
+            --primary-color: #3498db; /* Blue */
+            --secondary-color: #2ecc71; /* Green */
+            --accent-color: #e74c3c; /* Red */
+            --text-dark: #2c3e50; /* Dark Blue */
+            --text-light: #ecf0f1; /* Light Gray */
+            --bg-light: #f9f9f9; /* Off-white */
+            --bg-medium: #dff0d8; /* Light Greenish */
+            --bg-dark: #34495e; /* Dark Gray Blue */
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #c8e6c9); /* Soft gradient background */
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .profile-container {
+            background-color: var(--bg-light);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px var(--shadow);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+        }
+
+        /* Profile Picture Section */
+        .profile-picture-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--bg-medium);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .profile-picture-section img {
+            width: 150px; /* Adjust size as needed */
+            height: 150px; /* Should be equal to width for a perfect circle */
+            border-radius: 50%; /* Makes the image circular */
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+            border: 5px solid var(--primary-color); /* Blue border around the picture */
+            box-shadow: 0 0 0 7px var(--text-light), 0 5px 15px var(--shadow); /* Layered shadow for depth */
+            margin-bottom: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .profile-picture-section img:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        .profile-picture-section p {
+            font-size: 1.1em;
+            color: var(--text-dark);
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--secondary-color);
+            font-size: 1.8em;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            background-color: var(--bg-medium);
+            padding-top: 8px;
+            padding-bottom: 8px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        p {
+            margin: 8px 0;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        p strong {
+            color: var(--text-dark);
+            min-width: 120px; /* Aligns colons */
+            display: inline-block;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        ul li {
+            background-color: #ecf0f1; /* Light grey for list items */
+            margin-bottom: 8px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease-in-out, background-color 0.2s;
+        }
+
+        ul li:hover {
+            transform: translateX(5px);
+            background-color: #e0e6e7;
+        }
+
+        ul li strong {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-weight: 700;
+        }
+
+        /* Specific styling for technical skills and hobbies for better differentiation */
+        h2 + ul li {
+            background-color: #f7f9fc; /* Slightly different background for sub-sections */
+        }
+        
+        h2 + ul li:first-letter {
+            text-transform: capitalize;
+        }
+
+        /* Declaration specific styles */
+        .declaration-section {
+            margin-top: 40px;
+            border-top: 2px dashed var(--secondary-color);
+            padding-top: 20px;
+            text-align: right;
+        }
+
+        .declaration-section p {
+            font-size: 0.95em;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .declaration-section p strong {
+             min-width: auto; /* Reset min-width for declaration section */
+             display: inline;
+             color: var(--text-dark);
+        }
+        .declaration-section p:last-of-type {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1em;
+            margin-top: 15px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .profile-container {
+                padding: 20px;
+                border-radius: 10px;
+            }
+            h1 {
+                font-size: 2.2em;
+                margin-bottom: 20px;
+            }
+            h2 {
+                font-size: 1.5em;
+                padding-left: 10px;
+            }
+            p, ul li {
+                font-size: 1em;
+            }
+            .declaration-section {
+                text-align: left;
+            }
+            .profile-picture-section img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+                margin: 0;
+                min-height: auto;
+            }
+            .profile-container {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+            h1, h2, p, ul li {
+                color: black !important;
+                background-color: transparent !important;
+                text-shadow: none !important;
+                border: none !important;
+                padding-left: 0 !important;
+                border-left: none !important;
+                box-shadow: none !important;
+            }
+            p strong {
+                color: black !important;
+            }
+        }
+    </style>
 </head>
-<body style="background-color: rgb(31, 49, 49);">
-    <table border="10" width="100%" cellpadding="0" cellspacing="0" style="border-color: #817474;" bordercolor="#ffffff">
-        <tr>
-            <td style="padding: 100px;">
-                <table border="5"  cellpadding="20" cellspacing="0" align="center" style="border-color: #690a86;" bordercolor="FF0035" background-color="#FBFFFE">
-                    <tr>
-                        <td cellspacing="20" style="color: #ffffff; padding: 40px 100px 40px 40px;display: flex;">
-                            <div style="padding-right: 40px;"><img src="C:\Users\Admin\Desktop\Data Analytics\imgggg.jpg" alt="profile pic" style="width: 210px;"></div>
-                            <div>
-                                <h1>Here's My Profile</h1>
-                                <p><strong>My Name is Yashas</strong></p>
-                                 <p><strong>Age : 19</strong></p>
-                                 <p><strong>Gender : Male</strong></p>
-                                <p><strong>Education:</strong></p>
-                                <ul>
-                                    <li>10th - SSVM - 95%</li>
-                                    <li>12th - SJICPUC - 97%</li>
-                                    <li>BCA - SJU</li>
-                                </ul>
-                                <p><strong>Hobbies:</strong></p>
-                                <ul>
-                                    <li>Fashion</li>
-                                    <li>Fitness</li>
-                                    <li>Anime</li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-    
+<body>
+    <div class="profile-container">
+        <h1>Here's My Profile </h1>
+
+        <div class="profile-picture-section">
+            <img src="c:\Users\Admin\Downloads\WhatsApp Image 2025-07-08 at 21.28.27_d49994b0.jpg" alt="Yashas R Profile Picture">
+                </div>
+
+        <h2>Personal Details</h2>
+        <p><strong>Name:</strong> Yashas R</p>
+        <p><strong>Date of Birth:</strong> 22 Feb 2006</p>
+        <p><strong>Gender:</strong> Male</p>
+        <p><strong>Nationality:</strong> Indian</p>
+
+        <h2>Contact Information </h2>
+        <p><strong>Email:</strong> yashas2202@gmail.com</p>
+        <p><strong>Phone:</strong> +91 9606933222</p>
+        <p><strong>Location:</strong> Bengaluru, Karnataka, India</p>
+
+        <h2>Educational Qualifications </h2>
+        <ul>
+            <li><strong>10th</strong> – SSVM</li>
+            <li><strong>12th</strong> – SJICPUC</li>
+            <li><strong>BCA</strong> – St. Joseph's University </li>
+        </ul>
+
+        <h2>Technical Skills </h2>
+        <ul>
+            <li>Java, Python, C++</li>
+            <li>HTML, CSS</li>
+            <li>MySQL, VS Code</li>
+        </ul>
+
+        <h2>Hobbies & Interests </h2>
+        <ul>
+            <li>Fitness</li>
+            <li>Fashion</li>
+            <li>Anime</li>
+        </ul>
+
+        <div class="declaration-section">
+            <h2>Declaration</h2>
+            <p>I hereby declare that the information provided above is true and correct to the best of my knowledge.</p>
+            <p><strong>Place:</strong> Bangalore</p>
+            <p><strong>Date:</strong> 17 July 2025</p>
+            <p><strong>Signature:</strong> Yashas R</p>
+        </div>
+    </div>
 </body>
 </html>

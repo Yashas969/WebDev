@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+<input id="n1" type="number"><input id="n2" type="number">
+<button onclick="calc('+')">+</button>
+<button onclick="calc('-')">-</button>
+<p id="res"></p>
+<script>
+function calc(op){
+ let a=+document.getElementById("n1").value;
+ let b=+document.getElementById("n2").value;
+ document.getElementById("res").innerText=(op=='+')?a+b:a-b;
+}
+</script>
+</body>
+</html>
